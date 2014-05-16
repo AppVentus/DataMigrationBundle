@@ -1,0 +1,17 @@
+{
+    "name": "appventus/datamigration-bundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "description": "Record and import data",
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    },
+    {
+        "autoload": {
+        "psr-0": { "AppVentus\\DataMigrationBundle": "" }
+    },
+    "target-dir": "AppVentus/DataMigrationBundle"
+}
