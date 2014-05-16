@@ -4,6 +4,9 @@
     "type": "symfony-bundle",
     "description": "Record and import data",
     "minimum-stability": "dev",
+    "require": {
+    	"appventus/shortcuts-bundle" : "dev-master"
+    },    
     "extra": {
         "branch-alias": {
             "dev-master": "0.1-dev"
