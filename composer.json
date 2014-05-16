@@ -9,8 +9,7 @@
             "dev-master": "0.1-dev"
         }
     },
-    {
-        "autoload": {
+    "autoload": {
         "psr-0": { "AppVentus\\DataMigrationBundle": "" }
     },
     "target-dir": "AppVentus/DataMigrationBundle"
