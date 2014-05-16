@@ -19,7 +19,7 @@ Usage example:
 	
 
 # Installation and Usage #
-[Resources/documentation/technical](https://github.com/AppVentus/DataMigrationBundle/blob/master/Resources/documentation/usage.md)
+[Resources/documentation/usage](https://github.com/AppVentus/DataMigrationBundle/blob/master/Resources/documentation/usage.md)
     
 
 # Technical Documentation #
