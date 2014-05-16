@@ -1,0 +1,32 @@
+services:
+    appventus.data_migration.subscriber.dumpable_subscriber:
+        class: AppVentus\DataMigrationBundle\EventSubscriber\DumpableSubscriber
+        arguments: ["@service_container"] #we use the container to avoid circular references
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+    appventus.data_migration.serializer.migration_normalizer:
+        class: AppVentus\DataMigrationBundle\Serializer\Normalizer\MigrationNormalizer
+        tags:
+            - { name: serializer.normalizer }
+            
+    appventus.data_migration.serializer.dumpable_entity_normalizer:
+        class: AppVentus\DataMigrationBundle\Serializer\Normalizer\DumpableEntityNormalizer
+        arguments:
+            - "@doctrine"
+            - "@appventus.data_migration.helper.migration_entity_reference_helper"
+        tags:
+            - { name: serializer.normalizer }
+         
+    appventus.data_migration.serializer.dumpable_entity_denormalizer:
+        class: AppVentus\DataMigrationBundle\Serializer\Normalizer\DumpableEntityDenormalizer
+        arguments:
+            - "@doctrine"
+            - "@appventus.data_migration.helper.migration_entity_reference_helper"
+        tags:
+            - { name: serializer.denormalizer }
+    appventus.data_migration.serializer.migration_denormalizer:
+        class: AppVentus\DataMigrationBundle\Serializer\Normalizer\MigrationDenormalizer
+        tags:
+            - { name: serializer.denormalizer }
+            

@@ -1,0 +1,27 @@
+services:
+    appventus.data_migration.helper.migration_helper:
+        class: AppVentus\DataMigrationBundle\Helper\MigrationHelper
+        arguments: 
+            - "@doctrine.orm.entity_manager"
+            - "@appventus.data_migration.serializer.dumpable_entity_normalizer"
+            - "@appventus.data_migration.serializer.dumpable_entity_denormalizer"
+            - "@appventus.data_migration.helper.migration_entity_reference_helper"
+            - "@appventus.data_migration.helper.migration_version_helper"
+    appventus.data_migration.helper.migration_entity_reference_helper:
+        class: AppVentus\DataMigrationBundle\Helper\MigrationEntityReferenceHelper
+        arguments: ["@doctrine.orm.entity_manager"]
+    appventus.data_migration.helper.migration_version_helper:
+        class: AppVentus\DataMigrationBundle\Helper\MigrationVersionHelper
+        arguments: ["@doctrine.orm.entity_manager"]
+    appventus.data_migration.helper.dump_helper:
+        class: AppVentus\DataMigrationBundle\Helper\EntityDumpableHelper
+        arguments: 
+            - "@doctrine.orm.entity_manager"
+            - "@appventus.data_migration.helper.migration_helper"
+            - "@appventus.data_migration.helper.migration_entity_reference_helper"
+            - "@appventus.data_migration.helper.migration_version_helper"
+            - "@appventus.data_migration.serializer.migration_normalizer"
+            - "@appventus.data_migration.serializer.migration_denormalizer"
+            - "%appventus_data_migration.dumpable_entities%"
+            - "%appventus_data_migration.migration_file_path%"
+            
