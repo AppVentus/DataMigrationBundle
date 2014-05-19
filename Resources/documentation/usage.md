@@ -35,7 +35,7 @@ Usage example:
 
 Install sources using composer:
 
-	composer require appventus/datamigration:"dev-master"
+	composer require appventus/datamigration-bundle:"dev-master"
 
 
 We strongly recommend to enable this bundle only in a determined environment. (We created one named "record")
