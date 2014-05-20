@@ -229,7 +229,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
 
                             //get the foreign entity reference
                             $foreignEntityReference = $this->migrationEntityReferenceHelper->getReferenceByEntity($entity);
-                            $foreignIdentifier['reference'] = $entity->getId();
+                            $foreignIdentifier['reference'] = $foreignEntityReference;
                         }
 
                         $foreignIdentifiers[] = $foreignIdentifier;
