@@ -33,6 +33,10 @@ class AppVentusDataMigrationExtension extends Extension
         $value = $config[$key];
         $container->setParameter('appventus_data_migration.'.$key, $value);
 
+        $key = 'dumpable_instance_entities';
+        $value = $config[$key];
+        $container->setParameter('appventus_data_migration.'.$key, $value);
+
         $key = 'migration_file_path';
         $value = $config[$key];
 

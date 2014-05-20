@@ -24,4 +24,5 @@ services:
             - "@appventus.data_migration.serializer.migration_denormalizer"
             - "%appventus_data_migration.dumpable_entities%"
             - "%appventus_data_migration.migration_file_path%"
+            - "%appventus_data_migration.dumpable_instance_entities%"
             

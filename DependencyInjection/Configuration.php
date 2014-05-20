@@ -29,6 +29,11 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->arrayNode('dumpable_entities')
                     ->prototype('scalar')
+                    ->end()
+                ->end()
+                ->arrayNode('dumpable_instance_entities')
+                    ->prototype('scalar')
+                    ->end()
                 ->end()
             ->end();
 

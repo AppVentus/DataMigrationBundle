@@ -47,6 +47,7 @@ class EntityDumpableHelper
      * @param MigrationDenormalizer          $migrationDenormalizer
      * @param array                          $dumpableEntities               The list of dumpable entity classes
      * @param string                         $migrationFilePath              The path to the migration file
+     * @param array                          $dumpableInstanceEntities       The list of dumpable parent entities
      *
      * @SuppressWarnings functionMaxParameters
      */
@@ -57,7 +58,8 @@ class EntityDumpableHelper
         MigrationNormalizer $migrationNormalizer,
         MigrationDenormalizer $migrationDenormalizer,
         $dumpableEntities,
-        $migrationFilePath)
+        $migrationFilePath,
+        $dumpableInstanceEntities)
     {
         $this->em = $entityManager;
         $this->migrationHelper = $migrationHelper;
@@ -67,6 +69,7 @@ class EntityDumpableHelper
         $this->migrationNormalizer = $migrationNormalizer;
         $this->migrationDenormalizer = $migrationDenormalizer;
         $this->dumpableEntities = $dumpableEntities;
+        $this->dumpableInstanceEntities = $dumpableInstanceEntities;
     }
 
     /**
@@ -81,6 +84,17 @@ class EntityDumpableHelper
         return $classes;
     }
 
+    /**
+     * Get the list of class that an entity must extends to be dumpable
+     *
+     * @return array The list of dumpable entities
+     */
+    public function getDumpableInstanceEntities()
+    {
+        $classes = $this->dumpableInstanceEntities;
+
+        return $classes;
+    }
 
     /**
      * Dump an entity to the migration file

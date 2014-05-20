@@ -111,8 +111,10 @@ class DumpableSubscriber implements EventSubscriber
 
         $dumpableEntities = $dumpHelper->getDumpableEntities();
 
-        //no entities are listed, so we tracke all entities
-        if (count($dumpableEntities) === 0) {
+        $dumpableInstanceEntities = $dumpHelper->getDumpableInstanceEntities();
+
+        //no entities are listed, so we track all entities
+        if ((count($dumpableEntities) === 0) && (count($dumpableInstanceEntities) === 0)) {
             $trackAll = true;
         }
 
@@ -128,6 +130,19 @@ class DumpableSubscriber implements EventSubscriber
                 if (in_array($entityClass, $dumpableEntities)) {
                     //yes so let us dump it
                     $isDumpableEntity = true;
+                }
+
+                //is the class an instance of dumpableInstanceEntities
+                foreach ($dumpableInstanceEntities as $dumpableInstanceEntity) {
+                    //get the list of parents of the class and the class itself
+                    $parents = class_parents($entity);
+                    $parents[$entityClass] = $entityClass;
+
+                    //is the class of the entity in the array
+                    if (in_array($dumpableInstanceEntity, $parents)) {
+                        //yes so let us dump it
+                        $isDumpableEntity = true;
+                    }
                 }
             }
         }

@@ -62,23 +62,28 @@ Some configuration are availables:
 
  * migration_file_path
  * dumpable_entities
+ * dumpable_instance_entities
 
 ## migration_file_path (mandatory) ##
 The path of the yaml file that will contains the migration saved by AppVentus 
 ## dumpable_entities (optional) ##
 The list of entities that are tracked for the migration. 
 
-If the list is empty, all the entities are tracked
+## dumpable_instance_entities (optional) ##
+The list of entities that are tracked for the migration. If an entity is an instance of these entities, it will be tracked
+
+## Dump all entities ##
+If the list of dumpable_entities and dumpable_instance_entities are empties, all the entities are tracked
 
 ## Exemple ##
 
 	app_ventus_data_migration:
     	migration_file_path: %kernel.root_dir%/Resources/migration/migration.yml
 	    dumpable_entities:
-    	    - AcmeBundle\Entity\Widget
         	- AcmeBundle\Entity\Page
 	        - AcmeBundle\Entity\Route
-
+	    dumpable_instance_entities:
+    	    - AcmeBundle\Entity\Widget
 <b>Do not forget to clear the cache</b> in the record environment each time you modify the configuration
 
 	php app/console ca:cl --env=record
@@ -112,4 +117,12 @@ Only the entities using an 'id' attribute as an identifier can be tracked.
 
 The entities must have a public setter for each of its attributes.
 
+There is a bug in doctrine (and doctrine extensions) that might occur using this bundle:
 
+		http://www.doctrine-project.org/jira/browse/DDC-2726
+		
+		https://github.com/Atlantic18/DoctrineExtensions/issues/1026
+
+You can use this version of doctrine that patches temporarily this issues:
+
+		https://github.com/AppVentus/doctrine2

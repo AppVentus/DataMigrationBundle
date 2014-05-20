@@ -167,19 +167,23 @@ class DumpableEntityNormalizer implements NormalizerInterface
      */
     protected function convertAttributeValue($attribute, $fieldMapping)
     {
-        //the field type
-        $fieldType = $fieldMapping['type'];
+        if ($attribute !== null) {
+            //the field type
+            $fieldType = $fieldMapping['type'];
 
-        switch ($fieldType) {
-            case 'datetime':
-                $convertedValue = $attribute->format('Y-m-d H:i:s');
-                break;
-            case 'array':
-                $convertedValue = json_encode($attribute);
-                break;
-            default:
-                $convertedValue = $attribute;
-                break;
+            switch ($fieldType) {
+                case 'datetime':
+                    $convertedValue = $attribute->format('Y-m-d H:i:s');
+                    break;
+                case 'array':
+                    $convertedValue = json_encode($attribute);
+                    break;
+                default:
+                    $convertedValue = $attribute;
+                    break;
+            }
+        } else {
+            $convertedValue = null;
         }
 
         return $convertedValue;

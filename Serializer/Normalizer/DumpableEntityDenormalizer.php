@@ -156,19 +156,23 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
      */
     protected function revertAttributeValue($attribute, $fieldMapping)
     {
-        //the field type
-        $fieldType = $fieldMapping['type'];
+        if ($attribute !== null) {
+            //the field type
+            $fieldType = $fieldMapping['type'];
 
-        switch ($fieldType) {
-            case 'datetime':
-                $convertedValue = \DateTime::createFromFormat('Y-m-d H:i:s', $attribute);
-                break;
-            case 'array':
-                $convertedValue = json_decode($attribute, true);
-                break;
-            default:
-                $convertedValue = $attribute;
-                break;
+            switch ($fieldType) {
+                case 'datetime':
+                    $convertedValue = \DateTime::createFromFormat('Y-m-d H:i:s', $attribute);
+                    break;
+                case 'array':
+                    $convertedValue = json_decode($attribute, true);
+                    break;
+                default:
+                    $convertedValue = $attribute;
+                    break;
+            }
+        } else {
+            $convertedValue = null;
         }
 
         return $convertedValue;
