@@ -102,15 +102,15 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
         foreach ($fieldMappings as $fieldMapping) {
             //the name of the field
             $fieldName = $fieldMapping['fieldName'];
+            if($fieldName != 'root') {
+                //get the attribute
+                $attributeValue = $data[$fieldName];
 
-            //get the attribute
-            $attributeValue = $data[$fieldName];
-
-            //revert the value from a string
-            $convertedAttributeValue = $this->revertAttributeValue($attributeValue, $fieldMapping);
-
-            //add the value to the object
-            $object = $this->setAttributeValue($object, $fieldName, $convertedAttributeValue);
+                //revert the value from a string
+                $convertedAttributeValue = $this->revertAttributeValue($attributeValue, $fieldMapping);
+                //add the value to the object
+                $object = $this->setAttributeValue($object, $fieldName, $convertedAttributeValue);
+            }
         }
 
         return $object;
@@ -131,7 +131,6 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
     {
         //the method to get the field value
         $method = 'set'.ucfirst($fieldName);
-
         //give more information to developer in case of method lacking
         try {
             $reflexionMethod = new \ReflectionMethod($object, $method);
