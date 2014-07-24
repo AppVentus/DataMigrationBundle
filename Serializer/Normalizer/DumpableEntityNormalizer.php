@@ -3,7 +3,6 @@
 namespace AppVentus\DataMigrationBundle\Serializer\Normalizer;
 
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use AppVentus\DataMigrationBundle\Entity\MigrationEntityReference;
 use AppVentus\DataMigrationBundle\Helper\MigrationEntityReferenceHelper;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
@@ -36,8 +35,8 @@ class DumpableEntityNormalizer implements NormalizerInterface
      * Normalize the entity
      *
      * @param unknown $object
-     * @param string $format
-     * @param array $context
+     * @param string  $format
+     * @param array   $context
      *
      * @throws \Exception
      *
@@ -76,7 +75,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
     /**
      * Get the array data for the foreign entities of the entity
      *
-     * @param Entity $object
+     * @param Entity  $object
      * @param unknown $associationMappings
      *
      * @return array
@@ -106,8 +105,8 @@ class DumpableEntityNormalizer implements NormalizerInterface
     /**
      * Get the entity data (the primary attributes)
      *
-     * @param unknown $object
-     * @param unknown $fieldMappings
+     * @param  unknown            $object
+     * @param  unknown            $fieldMappings
      * @return multitype:Ambigous <string, unknown>
      */
     protected function getEntityData($object, $fieldMappings)
@@ -134,8 +133,8 @@ class DumpableEntityNormalizer implements NormalizerInterface
 
     /**
      *
-     * @param unknown $data
-     * @param string $format
+     * @param  unknown $data
+     * @param  string  $format
      * @return boolean
      *
      * @SuppressWarnings checkUnusedFunctionParameters
@@ -160,7 +159,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
     /**
      * Convert an attribute to a string
      *
-     * @param unknown $attribute
+     * @param unknown      $attribute
      * @param FieldMapping $fieldMapping
      *
      * @return string The attribute converted in a string
@@ -252,7 +251,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
      * Get the value of the attribute
      *
      * @param unknown $object
-     * @param string $fieldName
+     * @param string  $fieldName
      *
      * @throws \Exception
      *
@@ -261,13 +260,27 @@ class DumpableEntityNormalizer implements NormalizerInterface
     protected function getAttributeValue($object, $fieldName)
     {
         //the method to get the field value
-        $method = 'get'.ucfirst($fieldName);
+        $getMethod = 'get'.ucfirst($fieldName);
 
         //give more information to developer in case of method lacking
         try {
-            $reflexionMethod = new \ReflectionMethod($object, $method);
+            $reflexionMethodGet = new \ReflectionMethod($object, $getMethod);
         } catch (\Exception $ex) {
-            throw new \Exception('The dumpable object can not be dumped by AppVentus because there is no public method. Please provide this method:'.$ex->getMessage());
+            $reflexionMethodGet = null;
+        }
+        $isMethod = 'is'.ucfirst($fieldName);
+        try {
+            $reflexionMethodIs = new \ReflectionMethod($object, $isMethod);
+        } catch (\Exception $ex) {
+            $reflexionMethodIs = null;
+        }
+
+        if ($reflexionMethodIs) {
+            $reflexionMethod = $reflexionMethodIs;
+        } elseif ($reflexionMethodGet) {
+            $reflexionMethod = $reflexionMethodGet;
+        } else {
+            throw new \Exception('The dumpable object can not be dumped by AppVentus because there is no public method. Please provide one of these methods: ' . $getMethod . ' or ' . $isMethod);
         }
 
         //invoke the method on the object
