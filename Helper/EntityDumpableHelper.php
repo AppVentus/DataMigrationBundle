@@ -1,21 +1,17 @@
 <?php
+
 namespace AppVentus\DataMigrationBundle\Helper;
 
-
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Dumper;
 use AppVentus\DataMigrationBundle\Entity\Migration;
-use AppVentus\DataMigrationBundle\Entity\MigrationVersion;
-use AppVentus\DataMigrationBundle\Helper\MigrationVersionHelper;
-use AppVentus\DataMigrationBundle\Converter\MigrationConverter;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Yaml\Yaml;
-use AppVentus\DataMigrationBundle\Entity\MigrationEntityReference;
-use AppVentus\DataMigrationBundle\Serializer\Normalizer\MigrationNormalizer;
 use AppVentus\DataMigrationBundle\Serializer\Normalizer\MigrationDenormalizer;
 
+use AppVentus\DataMigrationBundle\Serializer\Normalizer\MigrationNormalizer;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\Yaml\Dumper;
+use Symfony\Component\Yaml\Yaml;
+
 /**
- * Helper for the dumpable entities
+ * Helper for the dumpable entities.
  *
  * @author Thomas Beaujean <thomas@appventus.com>
  *
@@ -37,7 +33,7 @@ class EntityDumpableHelper
     const ACTION_DELETE = 'delete';
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param EntityManager                  $entityManager
      * @param unknown                        $migrationHelper
@@ -73,7 +69,7 @@ class EntityDumpableHelper
     }
 
     /**
-     * Get the list of entities that are dumpable
+     * Get the list of entities that are dumpable.
      *
      * @return array The list of dumpable entities
      */
@@ -85,7 +81,7 @@ class EntityDumpableHelper
     }
 
     /**
-     * Get the list of class that an entity must extends to be dumpable
+     * Get the list of class that an entity must extends to be dumpable.
      *
      * @return array The list of dumpable entities
      */
@@ -97,9 +93,9 @@ class EntityDumpableHelper
     }
 
     /**
-     * Dump an entity to the migration file
+     * Dump an entity to the migration file.
      *
-     * @param String $action
+     * @param string $action
      * @param Entity $entity
      *
      * @throws \Exception The action is not handeld
@@ -122,7 +118,7 @@ class EntityDumpableHelper
     }
 
     /**
-     * Dump an entity to the yml file
+     * Dump an entity to the yml file.
      *
      * @param unknown $entity
      */
@@ -143,7 +139,7 @@ class EntityDumpableHelper
     }
 
     /**
-     * Dump an entity that is deleted
+     * Dump an entity that is deleted.
      *
      * @param unknown $entity
      */
@@ -159,7 +155,7 @@ class EntityDumpableHelper
     }
 
     /**
-     * Dump an entity that is updated
+     * Dump an entity that is updated.
      *
      * @param unknown $entity
      */
@@ -175,7 +171,7 @@ class EntityDumpableHelper
     }
 
     /**
-     * Dump a migration to the file
+     * Dump a migration to the file.
      *
      * @param Migration $migration
      */
@@ -197,7 +193,7 @@ class EntityDumpableHelper
     }
 
     /**
-     * Append the string to the migration file
+     * Append the string to the migration file.
      *
      * @param string $string
      */
@@ -213,10 +209,9 @@ class EntityDumpableHelper
     }
 
     /**
-     * Create the migration version
+     * Create the migration version.
      *
      * @param Migration $migration The migration
-     *
      */
     protected function createMigrationVersion(Migration $migration)
     {
@@ -227,7 +222,7 @@ class EntityDumpableHelper
     }
 
     /**
-     * Get the content of the migration file
+     * Get the content of the migration file.
      *
      * @return string
      */
@@ -241,7 +236,7 @@ class EntityDumpableHelper
     }
 
     /**
-     * Get the content of the migration as an array
+     * Get the content of the migration as an array.
      *
      * @return array
      */
@@ -255,14 +250,14 @@ class EntityDumpableHelper
     }
 
     /**
-     * Get the migrations that have not been runned yet
+     * Get the migrations that have not been runned yet.
      *
      * @return array:migration
      */
     public function getNewMigrations()
     {
         //the list of migrations
-        $migrations = array();
+        $migrations = [];
 
         //services
         $migrationDenormalizer = $this->migrationDenormalizer;
@@ -291,5 +286,4 @@ class EntityDumpableHelper
 
         return $migrations;
     }
-
 }

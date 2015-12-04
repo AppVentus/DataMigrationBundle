@@ -2,15 +2,13 @@
 
 namespace AppVentus\DataMigrationBundle\Serializer\Normalizer;
 
-use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use AppVentus\DataMigrationBundle\Helper\MigrationEntityReferenceHelper;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
- *
  * @author Thomas Beaujean
- *
  */
 class DumpableEntityDenormalizer implements DenormalizerInterface
 {
@@ -18,7 +16,7 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
     protected $migrationEntityReferenceHelper = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Doctrine                       $doctrine
      * @param MigrationEntityReferenceHelper $migrationEntityReferenceHelper
@@ -32,7 +30,7 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
     }
 
     /**
-     * Denormalize dumpable entity
+     * Denormalize dumpable entity.
      *
      * @param unknown $data
      * @param string  $class
@@ -43,7 +41,7 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
      *
      * @SuppressWarnings checkUnusedFunctionParameters
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         //create or retrieve the entity
         if (isset($context['entity'])) {
@@ -72,13 +70,13 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
     }
 
     /**
-     * Is this class supported
+     * Is this class supported.
      *
-     * @param array $data
-     * @param String $type
+     * @param array  $data
+     * @param string $type
      * @param string $format
      *
-     * @return boolean
+     * @return bool
      *
      * @SuppressWarnings checkUnusedFunctionParameters
      */
@@ -88,7 +86,7 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
     }
 
     /**
-     * Get the entity data (the primary attributes)
+     * Get the entity data (the primary attributes).
      *
      * @param unknown $object
      * @param unknown $fieldMappings
@@ -102,7 +100,7 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
         foreach ($fieldMappings as $fieldMapping) {
             //the name of the field
             $fieldName = $fieldMapping['fieldName'];
-            if($fieldName != 'root') {
+            if ($fieldName != 'root') {
                 //get the attribute
                 $attributeValue = $data[$fieldName];
 
@@ -117,7 +115,7 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
     }
 
     /**
-     * Get the value of the attribute
+     * Get the value of the attribute.
      *
      * @param unknown $object
      * @param string  $fieldName
@@ -144,11 +142,10 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
         return $object;
     }
 
-
     /**
-     * Revert an attribute from a string
+     * Revert an attribute from a string.
      *
-     * @param unknown $attribute
+     * @param unknown      $attribute
      * @param FieldMapping $fieldMapping
      *
      * @return string The attribute converted in a string
@@ -177,19 +174,18 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
         return $convertedValue;
     }
 
-
     /**
-     * Get the array data for the foreign entities of the entity
+     * Get the array data for the foreign entities of the entity.
      *
      * @param Entity  $object              The entity
      * @param unknown $associationMappings The association mapping
-     * @param Array   $data                The data
+     * @param array   $data                The data
      *
      * @return array
      */
     protected function setForeignEntityData($object, $associationMappings, $data)
     {
-        $normalizedObject = array();
+        $normalizedObject = [];
 
         //parse the fields
         foreach ($associationMappings as $associationMapping) {
@@ -208,9 +204,8 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
         return $normalizedObject;
     }
 
-
     /**
-     * Get the array of identifiers for a foreign entity
+     * Get the array of identifiers for a foreign entity.
      *
      * @param unknown            $foreignEntity
      * @param AssociationMapping $associationMapping
@@ -225,7 +220,6 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
 
         //association type
         $type = $associationMapping['type'];
-
 
         switch ($type) {
             case ClassMetadataInfo::MANY_TO_ONE:
@@ -252,7 +246,7 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
     }
 
     /**
-     * Get the entity manager
+     * Get the entity manager.
      *
      * @return EntityManager The entity manager
      */
@@ -265,11 +259,12 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
 
     /**
      * Get the id by the class (parent and sub classes included) and the reference
-     * The reference being unique, there is no problem looking into a list of classes
+     * The reference being unique, there is no problem looking into a list of classes.
      *
      * @param string $class
      * @param string $reference
-     * @return integer The id
+     *
+     * @return int The id
      */
     protected function getEntityIdByClassAndReference($class, $reference)
     {
@@ -285,7 +280,7 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
         $parentClasses = $metadata->parentClasses;
 
         //the list of classes
-        $classes = array();
+        $classes = [];
         $classes[] = $class;
         $classes = array_merge($classes, $subClasses);
         $classes = array_merge($classes, $parentClasses);
@@ -296,9 +291,9 @@ class DumpableEntityDenormalizer implements DenormalizerInterface
     }
 
     /**
-     * Get an entity by the attribute value
+     * Get an entity by the attribute value.
      *
-     * @param array $attributeValue
+     * @param array   $attributeValue
      * @param unknown $associationMappings The association mapping
      *
      * @throws \Exception

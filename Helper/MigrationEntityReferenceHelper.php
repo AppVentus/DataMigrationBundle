@@ -1,13 +1,13 @@
 <?php
+
 namespace AppVentus\DataMigrationBundle\Helper;
 
 use AppVentus\DataMigrationBundle\Entity\Migration;
-use AppVentus\DataMigrationBundle\Entity\MigrationVersion;
 use AppVentus\DataMigrationBundle\Entity\MigrationEntityReference;
 use Doctrine\ORM\EntityManager;
 
 /**
- * Helper for the migration version
+ * Helper for the migration version.
  *
  * @author Thomas Beaujean <thomas@appventus.com>
  *
@@ -18,7 +18,7 @@ class MigrationEntityReferenceHelper
     protected $em = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param EntityManager $entityConverter
      */
@@ -28,7 +28,7 @@ class MigrationEntityReferenceHelper
     }
 
     /**
-     * Get the reference of an entity is it exists
+     * Get the reference of an entity is it exists.
      *
      * @param unknown $entity
      *
@@ -57,7 +57,7 @@ class MigrationEntityReferenceHelper
     }
 
     /**
-     * Get the reference of an entity is it exists
+     * Get the reference of an entity is it exists.
      *
      * @param string $entityClass The entity class
      * @param string $reference   The reference
@@ -84,7 +84,7 @@ class MigrationEntityReferenceHelper
     }
 
     /**
-     * Get the reference of an entity is it exists
+     * Get the reference of an entity is it exists.
      *
      * @param string $entityClass The entity class
      * @param string $reference   The reference
@@ -111,7 +111,7 @@ class MigrationEntityReferenceHelper
     }
 
     /**
-     * Create the migration entity reference
+     * Create the migration entity reference.
      *
      * @param unknown $entity
      * @param string  $reference
@@ -133,9 +133,8 @@ class MigrationEntityReferenceHelper
         $em->flush();
     }
 
-
     /**
-     * Get the entity by its class and id
+     * Get the entity by its class and id.
      *
      * @param string class
      * @param string id
@@ -151,9 +150,8 @@ class MigrationEntityReferenceHelper
         $repo = $em->getRepository($class);
 
         //get the migration entity reference
-        $entity = $repo->findOneBy(array('id' => $id));
+        $entity = $repo->findOneBy(['id' => $id]);
 
         return $entity;
     }
-
 }

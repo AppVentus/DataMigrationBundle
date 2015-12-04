@@ -2,11 +2,10 @@
 
 namespace AppVentus\DataMigrationBundle\Serializer\Normalizer;
 
-use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use AppVentus\DataMigrationBundle\Entity\Migration;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
- *
  * @author Thomas Beaujean
  *
  * ref: appventus.data_migration.serializer.migration_denormalizer
@@ -14,18 +13,18 @@ use AppVentus\DataMigrationBundle\Entity\Migration;
 class MigrationDenormalizer implements DenormalizerInterface
 {
     /**
-     * Denormalize a migration
+     * Denormalize a migration.
      *
-     * @param array $data
+     * @param array   $data
      * @param unknown $class
-     * @param string $format
-     * @param array $context
+     * @param string  $format
+     * @param array   $context
+     *
      * @return \AppVentus\DataMigrationBundle\Entity\Migration
      *
      * @SuppressWarnings checkUnusedFunctionParameters
-     *
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         $migration = new Migration();
 
@@ -43,13 +42,13 @@ class MigrationDenormalizer implements DenormalizerInterface
     }
 
     /**
-     * Does the normalizer support this class
+     * Does the normalizer support this class.
      *
      * @param array  $data
      * @param string $type
      * @param string $format
      *
-     * @return boolean
+     * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)
     {

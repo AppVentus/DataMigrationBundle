@@ -2,15 +2,14 @@
 
 namespace AppVentus\DataMigrationBundle\Serializer\Normalizer;
 
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use AppVentus\DataMigrationBundle\Helper\MigrationEntityReferenceHelper;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
- * Normalize a dumpable entity
+ * Normalize a dumpable entity.
  *
  * @author Thomas Beaujean
- *
  */
 class DumpableEntityNormalizer implements NormalizerInterface
 {
@@ -18,7 +17,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
     protected $migrationEntityReferenceHelper = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Doctrine                       $doctrine
      * @param MigrationEntityReferenceHelper $migrationEntityReferenceHelper
@@ -32,7 +31,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
     }
 
     /**
-     * Normalize the entity
+     * Normalize the entity.
      *
      * @param unknown $object
      * @param string  $format
@@ -44,9 +43,9 @@ class DumpableEntityNormalizer implements NormalizerInterface
      *
      * @return array
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $normalizedObject = array();
+        $normalizedObject = [];
         //we want the columns
         $attributeReflectionObject = new \ReflectionObject($object);
 
@@ -73,7 +72,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
     }
 
     /**
-     * Get the array data for the foreign entities of the entity
+     * Get the array data for the foreign entities of the entity.
      *
      * @param Entity  $object
      * @param unknown $associationMappings
@@ -82,7 +81,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
      */
     protected function getForeignEntityData($object, $associationMappings)
     {
-        $normalizedObject = array();
+        $normalizedObject = [];
 
         //parse the fields
         foreach ($associationMappings as $associationMapping) {
@@ -103,15 +102,16 @@ class DumpableEntityNormalizer implements NormalizerInterface
     }
 
     /**
-     * Get the entity data (the primary attributes)
+     * Get the entity data (the primary attributes).
      *
-     * @param  unknown            $object
-     * @param  unknown            $fieldMappings
+     * @param unknown $object
+     * @param unknown $fieldMappings
+     *
      * @return multitype:Ambigous <string, unknown>
      */
     protected function getEntityData($object, $fieldMappings)
     {
-        $normalizedObject = array();
+        $normalizedObject = [];
 
         //parse the fields
         foreach ($fieldMappings as $fieldMapping) {
@@ -132,10 +132,10 @@ class DumpableEntityNormalizer implements NormalizerInterface
     }
 
     /**
+     * @param unknown $data
+     * @param string  $format
      *
-     * @param  unknown $data
-     * @param  string  $format
-     * @return boolean
+     * @return bool
      *
      * @SuppressWarnings checkUnusedFunctionParameters
      */
@@ -145,7 +145,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
     }
 
     /**
-     * Get the entity manager
+     * Get the entity manager.
      *
      * @return EntityManager The entity manager
      */
@@ -157,7 +157,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
     }
 
     /**
-     * Convert an attribute to a string
+     * Convert an attribute to a string.
      *
      * @param unknown      $attribute
      * @param FieldMapping $fieldMapping
@@ -189,7 +189,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
     }
 
     /**
-     * Get the array of identifiers for a foreign entity
+     * Get the array of identifiers for a foreign entity.
      *
      * @param Entity  $foreignEntity
      * @param Mapping $associationMapping
@@ -200,7 +200,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
      */
     protected function getForeignIdentifiers($foreignEntity, $associationMapping)
     {
-        $foreignIdentifiers = array();
+        $foreignIdentifiers = [];
 
         //the type of association
         $type = $associationMapping['type'];
@@ -223,7 +223,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
             case ClassMetadataInfo::MANY_TO_MANY:
                 if ($foreignEntity !== null) {
                     foreach ($foreignEntity as $entity) {
-                        $foreignIdentifier = array();
+                        $foreignIdentifier = [];
                         if ($foreignEntity === null) {
                             $foreignIdentifier['id'] = null;
                             $foreignIdentifier['reference'] = null;
@@ -248,7 +248,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
     }
 
     /**
-     * Get the value of the attribute
+     * Get the value of the attribute.
      *
      * @param unknown $object
      * @param string  $fieldName
@@ -280,7 +280,7 @@ class DumpableEntityNormalizer implements NormalizerInterface
         } elseif ($reflexionMethodGet) {
             $reflexionMethod = $reflexionMethodGet;
         } else {
-            throw new \Exception('The dumpable object can not be dumped by AppVentus because there is no public method. Please provide one of these methods: ' . $getMethod . ' or ' . $isMethod);
+            throw new \Exception('The dumpable object can not be dumped by AppVentus because there is no public method. Please provide one of these methods: '.$getMethod.' or '.$isMethod);
         }
 
         //invoke the method on the object

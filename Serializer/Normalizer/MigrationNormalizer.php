@@ -3,12 +3,9 @@
 namespace AppVentus\DataMigrationBundle\Serializer\Normalizer;
 
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use AppVentus\DataMigrationBundle\Entity\MigrationEntityReference;
-use AppVentus\DataMigrationBundle\Helper\MigrationEntityReferenceHelper;
-use AppVentus\DataMigrationBundle\Entity\Migration;
 
 /**
- * Normalize a dumpable entity
+ * Normalize a dumpable entity.
  *
  * @author Thomas Beaujean
  *
@@ -17,11 +14,11 @@ use AppVentus\DataMigrationBundle\Entity\Migration;
 class MigrationNormalizer implements NormalizerInterface
 {
     /**
-     * Normalize the entity
+     * Normalize the entity.
      *
      * @param unknown $object
-     * @param string $format
-     * @param array $context
+     * @param string  $format
+     * @param array   $context
      *
      * @throws \Exception
      *
@@ -29,9 +26,9 @@ class MigrationNormalizer implements NormalizerInterface
      *
      * @return array
      */
-    public function normalize($migration, $format = null, array $context = array())
+    public function normalize($migration, $format = null, array $context = [])
     {
-        $array = array();
+        $array = [];
 
         $array['id'] = $migration->getId();
         $array['action'] = $migration->getAction();
@@ -45,11 +42,12 @@ class MigrationNormalizer implements NormalizerInterface
     }
 
     /**
-     * Does the normalizer support this data
+     * Does the normalizer support this data.
      *
      * @param unknown $data
-     * @param string $format
-     * @return boolean
+     * @param string  $format
+     *
+     * @return bool
      */
     public function supportsNormalization($data, $format = null)
     {

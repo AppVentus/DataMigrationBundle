@@ -1,10 +1,11 @@
 <?php
+
 namespace AppVentus\DataMigrationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * MigrationEntityReference
+ * MigrationEntityReference.
  *
  * @ORM\Entity(repositoryClass="AppVentus\DataMigrationBundle\Repository\MigrationEntityReferenceRepository")
  * @ORM\Table(name="av_dm_entity_reference")
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class MigrationEntityReference
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -41,15 +42,13 @@ class MigrationEntityReference
      */
     protected $reference;
 
-
     /**
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     *
      */
     protected $createdAt;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -57,9 +56,9 @@ class MigrationEntityReference
     }
 
     /**
-     * Set id
+     * Set id.
      *
-     * @param integer
+     * @param int
      */
     public function setId($id)
     {
@@ -67,9 +66,9 @@ class MigrationEntityReference
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -77,9 +76,9 @@ class MigrationEntityReference
     }
 
     /**
-     * Get entityId
+     * Get entityId.
      *
-     * @return integer
+     * @return int
      */
     public function getEntityId()
     {
@@ -87,9 +86,9 @@ class MigrationEntityReference
     }
 
     /**
-     * Set entityId
+     * Set entityId.
      *
-     * @param integer
+     * @param int
      */
     public function setEntityId($id)
     {
@@ -97,9 +96,10 @@ class MigrationEntityReference
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
+     *
      * @return UserAlert
      */
     public function setCreatedAt($createdAt)
@@ -110,7 +110,7 @@ class MigrationEntityReference
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -120,7 +120,7 @@ class MigrationEntityReference
     }
 
     /**
-     * Set class
+     * Set class.
      *
      * @param string
      */
@@ -130,7 +130,7 @@ class MigrationEntityReference
     }
 
     /**
-     * Get class
+     * Get class.
      *
      * @return string
      */
@@ -140,7 +140,7 @@ class MigrationEntityReference
     }
 
     /**
-     * Get the reference
+     * Get the reference.
      *
      * @return string The reference
      */
@@ -150,7 +150,7 @@ class MigrationEntityReference
     }
 
     /**
-     * Set the reference
+     * Set the reference.
      *
      * @param string $reference
      */

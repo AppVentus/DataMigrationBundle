@@ -1,10 +1,11 @@
 <?php
+
 namespace AppVentus\DataMigrationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Page
+ * Page.
  *
  * @ORM\Entity
  * @ORM\Table(name="av_dm_migration")
@@ -21,13 +22,11 @@ class MigrationVersion
 
     /**
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     *
      */
     protected $createdAt;
 
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -35,7 +34,7 @@ class MigrationVersion
     }
 
     /**
-     * Set id
+     * Set id.
      *
      * @param string
      */
@@ -45,7 +44,7 @@ class MigrationVersion
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return string
      */
@@ -55,9 +54,10 @@ class MigrationVersion
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
+     *
      * @return UserAlert
      */
     public function setCreatedAt($createdAt)
@@ -68,7 +68,7 @@ class MigrationVersion
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -76,5 +76,4 @@ class MigrationVersion
     {
         return $this->createdAt;
     }
-
 }

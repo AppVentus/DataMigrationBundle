@@ -1,11 +1,9 @@
 <?php
+
 namespace AppVentus\DataMigrationBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * A migration
- *
+ * A migration.
  */
 class Migration
 {
@@ -18,7 +16,7 @@ class Migration
     protected $class;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -27,7 +25,7 @@ class Migration
     }
 
     /**
-     * Get the identifier for the new migration
+     * Get the identifier for the new migration.
      *
      * @return string
      */
@@ -35,11 +33,12 @@ class Migration
     {
         //we do not want a comma in the reference
         $reference = microtime(true) * 10000;
+
         return $reference;
     }
 
     /**
-     * Get the id
+     * Get the id.
      *
      * @return string
      */
@@ -49,7 +48,8 @@ class Migration
     }
 
     /**
-     * Set the id
+     * Set the id.
+     *
      * @param string $id
      */
     public function setId($id)
@@ -58,7 +58,7 @@ class Migration
     }
 
     /**
-     * Get the date
+     * Get the date.
      *
      * @return DateTime
      */
@@ -68,7 +68,7 @@ class Migration
     }
 
     /**
-     * Set the date
+     * Set the date.
      *
      * @param DateTime $date
      */
@@ -78,7 +78,7 @@ class Migration
     }
 
     /**
-     * Set the reference
+     * Set the reference.
      *
      * @param string $reference
      */
@@ -88,7 +88,7 @@ class Migration
     }
 
     /**
-     * Get the reference
+     * Get the reference.
      *
      * @return string the reference
      */
@@ -98,7 +98,7 @@ class Migration
     }
 
     /**
-     * Set the action
+     * Set the action.
      *
      * @param string $action
      */
@@ -108,7 +108,7 @@ class Migration
     }
 
     /**
-     * Get the action
+     * Get the action.
      *
      * @return string The action
      */
@@ -118,7 +118,8 @@ class Migration
     }
 
     /**
-     * Set the data
+     * Set the data.
+     *
      * @param array $data
      */
     public function setData($data)
@@ -127,7 +128,8 @@ class Migration
     }
 
     /**
-     * Get the data
+     * Get the data.
+     *
      * @return array
      */
     public function getData()
@@ -136,7 +138,7 @@ class Migration
     }
 
     /**
-     * Get the class
+     * Get the class.
      *
      * @return string The class
      */
@@ -146,7 +148,8 @@ class Migration
     }
 
     /**
-     * Set the class
+     * Set the class.
+     *
      * @param string $class
      */
     public function setClass($class)
@@ -155,7 +158,7 @@ class Migration
     }
 
     /**
-     * Get the entity id
+     * Get the entity id.
      *
      * @return string The entity id
      */
@@ -165,7 +168,8 @@ class Migration
     }
 
     /**
-     * Set the entity id
+     * Set the entity id.
+     *
      * @param string $entityId
      */
     public function setEntityId($entityId)
