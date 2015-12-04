@@ -1,43 +1,36 @@
 <?php
+
 namespace AppVentus\DataMigrationBundle\Command;
 
-use Sensio\Bundle\GeneratorBundle\Command\GenerateBundleCommand;
-use Symfony\Component\Console\Input\InputOption;
+use AppVentus\Awesome\ShortcutsBundle\Command\BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use AppVentus\CoreBundle\Generator\WidgetGenerator;
-use Sensio\Bundle\GeneratorBundle\Generator\DoctrineEntityGenerator;
-use Sensio\Bundle\GeneratorBundle\Command\Validators;
-use Sensio\Bundle\GeneratorBundle\Command\Helper\DialogHelper;
-use Doctrine\DBAL\Types\Type;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use AppVentus\Awesome\ShortcutsBundle\Command\BaseCommand;
 
 /**
- * Import all the entities stored in the migration.yml file
+ * Import all the entities stored in the migration.yml file.
  */
 class DataUpdateCommand extends BaseCommand
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure()
     {
         parent::configure();
 
         $this->setName('appventus:data:update')
-            ->setDefinition(array())
+            ->setDefinition([])
             ->setDescription('Import the page, widget, etc. that are in the migration.yml file');
     }
 
     /**
-     * Take arguments and options defined in $this->interact() and generate a new Widget
+     * Take arguments and options defined in $this->interact() and generate a new Widget.
+     *
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
      * @see Command
+     *
      * @throws \InvalidArgumentException When namespace doesn't end with Bundle
      * @throws \RuntimeException         When bundle can't be executed
      *
@@ -85,7 +78,6 @@ class DataUpdateCommand extends BaseCommand
 
         //commit the transaction
         $em->getConnection()->commit();
-
 
         $this->write('Import of entities of the migration finished successfully');
     }

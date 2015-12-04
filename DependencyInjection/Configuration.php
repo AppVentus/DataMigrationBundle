@@ -6,14 +6,12 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- *
  * @author Thomas Beaujean <thomas@appventus.com>
- *
  */
 class Configuration implements ConfigurationInterface
 {
     /**
-     * Get the config
+     * Get the config.
      *
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
      */

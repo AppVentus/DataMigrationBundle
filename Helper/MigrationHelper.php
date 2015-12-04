@@ -1,18 +1,14 @@
 <?php
+
 namespace AppVentus\DataMigrationBundle\Helper;
 
-use AppVentus\DataMigrationBundle\Helper\EntityDumpableHelper;
 
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Dumper;
 use AppVentus\DataMigrationBundle\Entity\Migration;
-use AppVentus\DataMigrationBundle\Entity\MigrationEntityReference;
-use AppVentus\DataMigrationBundle\Serializer\Normalizer\DumpableEntityNormalizer;
-use AppVentus\DataMigrationBundle\Helper\MigrationEntityReferenceHelper;
 use AppVentus\DataMigrationBundle\Serializer\Normalizer\DumpableEntityDenormalizer;
+use AppVentus\DataMigrationBundle\Serializer\Normalizer\DumpableEntityNormalizer;
 
 /**
- * Helper for the dumpable entities
+ * Helper for the dumpable entities.
  *
  * @author Thomas Beaujean <thomas@appventus.com>
  *
@@ -26,13 +22,13 @@ class MigrationHelper
     protected $migrationVersionHelper = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param EntityManager $entityManager
-     * @param DumpableEntityNormalizer $normalizer
-     * @param DumpableEntityDenormalizer $entityDenormalizer
+     * @param EntityManager                  $entityManager
+     * @param DumpableEntityNormalizer       $normalizer
+     * @param DumpableEntityDenormalizer     $entityDenormalizer
      * @param MigrationEntityReferenceHelper $migrationEntityReferenceHelper
-     * @param MigrationVersionHelper $migrationVersionHelper
+     * @param MigrationVersionHelper         $migrationVersionHelper
      */
     public function __construct(
         $entityManager,
@@ -49,14 +45,14 @@ class MigrationHelper
     }
 
     /**
-     * Generate a migration
+     * Generate a migration.
      *
      * @param string $action
      * @param Entity $entity
      *
-     * @return Migration
-     *
      * @throws \Exception
+     *
+     * @return Migration
      */
     public function generateMigration($action, $entity)
     {
@@ -98,7 +94,7 @@ class MigrationHelper
     }
 
     /**
-     * Generate a reference for the entity
+     * Generate a reference for the entity.
      *
      * @return string The new reference
      */
@@ -110,9 +106,8 @@ class MigrationHelper
         return $reference;
     }
 
-
     /**
-     * Run a migration
+     * Run a migration.
      *
      * @param Migration $migration
      *
@@ -177,7 +172,7 @@ class MigrationHelper
                 }
 
                 //give the entity to the denormalizer
-                $context = array();
+                $context = [];
                 $context['entity'] = $entity;
 
                 //get an entity from the data
@@ -225,11 +220,11 @@ class MigrationHelper
     }
 
     /**
-     * Is the migration new
+     * Is the migration new.
      *
-     * @param integer $migrationId
+     * @param int $migrationId
      *
-     * @return boolean is the migration a new one
+     * @return bool is the migration a new one
      */
     public function isNewMigration($migrationId)
     {
@@ -241,7 +236,7 @@ class MigrationHelper
         $repo = $em->getRepository('AppVentusDataMigrationBundle:MigrationVersion');
 
         //get the migration version
-        $migrationVersion = $repo->findOneBy(array('id' => $migrationId));
+        $migrationVersion = $repo->findOneBy(['id' => $migrationId]);
 
         //if one was found
         if ($migrationVersion !== null) {

@@ -1,27 +1,25 @@
 <?php
+
 namespace AppVentus\DataMigrationBundle\EventSubscriber;
 
-use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
-use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use AppVentus\DataMigrationBundle\Helper\EntityDumpableHelper;
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 /**
- *
- * ref: appventus.data_migration.subscriber.dumpable_subscriber
+ * ref: appventus.data_migration.subscriber.dumpable_subscriber.
  */
 class DumpableSubscriber implements EventSubscriber
 {
     protected $container = null;
 
-    protected $entitiesNotTracked = array(
+    protected $entitiesNotTracked = [
         'AppVentus\DataMigrationBundle\Entity\MigrationEntityReference',
-        'AppVentus\DataMigrationBundle\Entity\MigrationVersion'
-    );
+        'AppVentus\DataMigrationBundle\Entity\MigrationVersion',
+    ];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param EntityDumpableHelper $dumpHelper
      */
@@ -32,23 +30,23 @@ class DumpableSubscriber implements EventSubscriber
     }
 
     /**
-     * bind to LoadClassMetadata method
+     * bind to LoadClassMetadata method.
      *
      * @return array
      */
     public function getSubscribedEvents()
     {
         //the tracked events
-        $events = array(
+        $events = [
             'postPersist',
             'postUpdate',
-            'preRemove');
+            'preRemove', ];
 
         return $events;
     }
 
     /**
-     * On persist on entities, check if the entity is dumpable
+     * On persist on entities, check if the entity is dumpable.
      *
      * @param LifecycleEventArgs $event
      */
@@ -58,7 +56,7 @@ class DumpableSubscriber implements EventSubscriber
     }
 
     /**
-     * On update on entities, check if the entity is dumpable
+     * On update on entities, check if the entity is dumpable.
      *
      * @param LifecycleEventArgs $event
      */
@@ -68,7 +66,7 @@ class DumpableSubscriber implements EventSubscriber
     }
 
     /**
-     * On delete on entities, check if the entity is dumpable
+     * On delete on entities, check if the entity is dumpable.
      *
      * @param LifecycleEventArgs $event
      */
@@ -78,7 +76,7 @@ class DumpableSubscriber implements EventSubscriber
     }
 
     /**
-     * Test if the entity is dumpable and dumps it if it is the case
+     * Test if the entity is dumpable and dumps it if it is the case.
      *
      * @param LifecycleEventArgs $event
      * @param string             $action
@@ -96,11 +94,11 @@ class DumpableSubscriber implements EventSubscriber
     }
 
     /**
-     * Is the entity a dumpable one
+     * Is the entity a dumpable one.
      *
      * @param Entity $entity
      *
-     * @return boolean
+     * @return bool
      */
     protected function isAppVentusDumpableEntity($entity)
     {
@@ -150,5 +148,3 @@ class DumpableSubscriber implements EventSubscriber
         return $isDumpableEntity;
     }
 }
-
-

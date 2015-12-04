@@ -1,4 +1,5 @@
 <?php
+
 namespace AppVentus\DataMigrationBundle\Helper;
 
 use AppVentus\DataMigrationBundle\Entity\Migration;
@@ -6,7 +7,7 @@ use AppVentus\DataMigrationBundle\Entity\MigrationVersion;
 use Doctrine\ORM\EntityManager;
 
 /**
- * Helper for the migration version
+ * Helper for the migration version.
  *
  * @author Thomas Beaujean <thomas@appventus.com>
  *
@@ -17,7 +18,7 @@ class MigrationVersionHelper
     protected $em = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param EntityManager $entityConverter
      */
@@ -27,10 +28,9 @@ class MigrationVersionHelper
     }
 
     /**
-     * Create the migration version
+     * Create the migration version.
      *
      * @param Migration $migration The migration
-     *
      */
     public function createMigrationVersion(Migration $migration)
     {

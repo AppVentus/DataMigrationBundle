@@ -6,12 +6,12 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * MigrationEntityReferenceRepository
+ * MigrationEntityReferenceRepository.
  */
 class MigrationEntityReferenceRepository extends EntityRepository
 {
     /**
-     * Get on a migration entity reference by class and id
+     * Get on a migration entity reference by class and id.
      *
      * @param string $class
      * @param sintrg $id
@@ -39,10 +39,11 @@ class MigrationEntityReferenceRepository extends EntityRepository
     }
 
     /**
-     * Find a migration entity reference by the class and the reference
+     * Find a migration entity reference by the class and the reference.
      *
      * @param string $class
      * @param string $reference
+     *
      * @return Ambigous <NULL, unknown>
      */
     public function findOneByClassAndReference($class, $reference)
@@ -66,10 +67,11 @@ class MigrationEntityReferenceRepository extends EntityRepository
     }
 
     /**
-     * Find a migration entity reference by the classes and the reference
+     * Find a migration entity reference by the classes and the reference.
      *
      * @param string $classes
      * @param string $reference
+     *
      * @return Ambigous <NULL, unknown>
      */
     public function findOneByClassesAndReference($classes, $reference)
@@ -93,7 +95,7 @@ class MigrationEntityReferenceRepository extends EntityRepository
     }
 
     /**
-     * Filter by class
+     * Filter by class.
      *
      * @param QueryBuilder $qb        The query builder
      * @param string       $class     The class
@@ -118,9 +120,8 @@ class MigrationEntityReferenceRepository extends EntityRepository
         return $qb;
     }
 
-
     /**
-     * Filter by filterByEntityId
+     * Filter by filterByEntityId.
      *
      * @param QueryBuilder $qb        The query builder
      * @param string       $class     The class
@@ -145,9 +146,8 @@ class MigrationEntityReferenceRepository extends EntityRepository
         return $qb;
     }
 
-
     /**
-     * Filter by filterByReference
+     * Filter by filterByReference.
      *
      * @param QueryBuilder $qb        The query builder
      * @param string       $reference The reference
@@ -172,9 +172,8 @@ class MigrationEntityReferenceRepository extends EntityRepository
         return $qb;
     }
 
-
     /**
-     * Filter by class
+     * Filter by class.
      *
      * @param QueryBuilder $qb        The query builder
      * @param array        $classes   The classes
@@ -193,13 +192,13 @@ class MigrationEntityReferenceRepository extends EntityRepository
     }
 
     /**
-     * Filter query builder using an orX
+     * Filter query builder using an orX.
      *
-     * @param QueryBuilder $qb            The query builder
-     * @param string $tableName           The name of the table
-     * @param string $parameterNameSuffix The suffix for the parameter name
-     * @param string $columnName          The name of the column to filter
-     * @param array  $values              The allowed values
+     * @param QueryBuilder $qb                  The query builder
+     * @param string       $tableName           The name of the table
+     * @param string       $parameterNameSuffix The suffix for the parameter name
+     * @param string       $columnName          The name of the column to filter
+     * @param array        $values              The allowed values
      *
      * @return QueryBuilder
      */
